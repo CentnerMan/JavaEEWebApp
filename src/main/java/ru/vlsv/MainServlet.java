@@ -1,5 +1,16 @@
 package ru.vlsv;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.vlsv.examples.BasicServlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  * GeekBrains Java, JavaEEWebApp.
  *
@@ -8,5 +19,23 @@ package ru.vlsv;
  * @link https://github.com/Centnerman
  */
 
-public class MainServlet {
+@WebServlet(name = "MainServlet", urlPatterns = "/main")
+public class MainServlet extends HttpServlet {
+
+    private static Logger logger = LoggerFactory.getLogger(BasicServlet.class);
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setHeader("Content-type", "text/html; charset=utf-8");
+        logger.info("New Get request with includes");
+//        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
+        resp.getWriter().println("<h1>Main - Главная</h1>");
+        resp.getWriter().write("text");
+        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
 }
