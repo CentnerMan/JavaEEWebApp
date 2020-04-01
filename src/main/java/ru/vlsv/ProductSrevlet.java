@@ -26,11 +26,11 @@ public class ProductSrevlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Content-type", "text/html; charset=utf-8");
-        resp.getWriter().println("<h1>Products</h1>");
+//        resp.setHeader("Content-type", "text/html; charset=utf-8");
 //        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
-        resp.getWriter().write("text");
-        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
+        resp.getWriter().println("<h1>Product</h1>");
+        resp.getWriter().write("One Product");
+//        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
     }
 
     @Override

@@ -9,9 +9,11 @@
 
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+<% for (int i = 0; i < 3; i++) { %>
+    <p>hello</p>
+<% } %>
 </body>
 </html>

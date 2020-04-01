@@ -26,11 +26,11 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Content-type", "text/html; charset=utf-8");
-        resp.getWriter().println("<h1>Order</h1>");
+//        resp.setHeader("Content-type", "text/html; charset=utf-8");
 //        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
-        resp.getWriter().write("text");
-        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
+        resp.getWriter().println("<h1>Order</h1>");
+        resp.getWriter().write("The Order");
+//        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
 
     }
 

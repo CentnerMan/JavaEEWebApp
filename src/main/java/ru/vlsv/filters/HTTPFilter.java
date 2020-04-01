@@ -25,11 +25,16 @@ public class HTTPFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        servletResponse.getWriter().println("<h2>Header from filter</h2>");
         servletResponse.setCharacterEncoding("UTF-8");
+        servletResponse.setContentType("text/html");
+//        servletResponse.setContentType("text/html; charset=UTF-8");
+        servletResponse.getWriter().print("");
         filterConfig.getServletContext().getRequestDispatcher("/header.html").include(servletRequest, servletResponse);
+
         filterChain.doFilter(servletRequest, servletResponse);
-        servletResponse.getWriter().println("<h2>Footer from filter</h2>");
+
+        filterConfig.getServletContext().getRequestDispatcher("/footer.html").include(servletRequest, servletResponse);
+//        servletResponse.getWriter().println("<h2>Footer from filter</h2>");
 
     }
 

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.time.LocalDateTime" %><%--
   Created by IntelliJ IDEA.
   @author Anatoly Lebedev
   @link https://github.com/Centnerman
@@ -9,9 +9,14 @@
 
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-$END$
+<p><%= LocalDateTime.now().toString()%>
+</p>
+<br/>
+<h1>Наш магазин</h1>
+<h2>Самый магазинистый магазин в мире!</h2>
+
 </body>
 </html>

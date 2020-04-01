@@ -26,12 +26,12 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Content-type", "text/html; charset=utf-8");
-        logger.info("New Get request with includes");
+//        resp.setHeader("Content-type", "text/html; charset=utf-8");
 //        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
+        logger.info("New Get request with includes");
         resp.getWriter().println("<h1>Main - Главная</h1>");
         resp.getWriter().write("text");
-        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
+//        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
     }
 
     @Override
