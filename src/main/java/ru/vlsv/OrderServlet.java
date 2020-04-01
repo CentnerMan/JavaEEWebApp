@@ -30,7 +30,7 @@ public class OrderServlet extends HttpServlet {
 //        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
         resp.getWriter().println("<h1>Order</h1>");
         resp.getWriter().write("The Order");
-//        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
+        getServletContext().getRequestDispatcher("/order.jsp").include(req, resp);
 
     }
 

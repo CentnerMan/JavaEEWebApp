@@ -9,7 +9,7 @@
     <context-param>
         <param-name>jdbcConnectionString</param-name>
         <param-value>jdbc:mysql://localhost:3306/javaee_test?createDatabaseIfNotExist</param-value>
-<!--        <param-value>jdbc:mysql://localhost:3306/javaee_test?createDatabaseIfNotExist=true&characterEncoding=UTF-8&serverTimezone=UTC</param-value>-->
+<!--        <param-value>"jdbc:mysql://localhost:3306/javaee_test?createDatabaseIfNotExist=true&characterEncoding=UTF-8&serverTimezone=UTC"</param-value>-->
     </context-param>
 
     <context-param>

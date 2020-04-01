@@ -15,7 +15,8 @@
 <body>
 
 <% ProductRepository repository = (ProductRepository) application.getAttribute("productRepository"); %>
-<table>
+
+<table border="1">
     <tr>
         <th>Id</th>
         <th>Product Name</th>

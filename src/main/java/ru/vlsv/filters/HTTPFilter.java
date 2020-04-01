@@ -34,8 +34,6 @@ public class HTTPFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
 
         filterConfig.getServletContext().getRequestDispatcher("/footer.html").include(servletRequest, servletResponse);
-//        servletResponse.getWriter().println("<h2>Footer from filter</h2>");
-
     }
 
     @Override

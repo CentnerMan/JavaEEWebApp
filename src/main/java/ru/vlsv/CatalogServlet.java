@@ -31,6 +31,7 @@ public class CatalogServlet extends HttpServlet {
         resp.getWriter().println("<h1>Catalog</h1>");
         resp.getWriter().write("Products catalog");
 //        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
+        getServletContext().getRequestDispatcher("/products.jsp").include(req, resp);
 
     }
 

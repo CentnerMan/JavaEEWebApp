@@ -31,7 +31,7 @@ public class MainServlet extends HttpServlet {
         logger.info("New Get request with includes");
         resp.getWriter().println("<h1>Main - Главная</h1>");
         resp.getWriter().write("text");
-//        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
+        getServletContext().getRequestDispatcher("/about.jsp").include(req, resp);
     }
 
     @Override

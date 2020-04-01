@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 
 @WebServlet(name = "ProductServlet", urlPatterns = "/product")
-public class ProductSrevlet extends HttpServlet {
+public class ProductServlet extends HttpServlet {
 
     private static Logger logger = LoggerFactory.getLogger(BasicServlet.class);
 
@@ -30,7 +30,7 @@ public class ProductSrevlet extends HttpServlet {
 //        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
         resp.getWriter().println("<h1>Product</h1>");
         resp.getWriter().write("One Product");
-        getServletContext().getRequestDispatcher("/products.jsp").forward(req, resp);
+//        getServletContext().getRequestDispatcher("/products.jsp").include(req, resp);
     }
 
     @Override

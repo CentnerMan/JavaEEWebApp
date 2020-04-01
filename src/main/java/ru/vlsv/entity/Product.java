@@ -1,5 +1,8 @@
 package ru.vlsv.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 
 /**
@@ -10,46 +13,13 @@ import java.math.BigDecimal;
  * @link https://github.com/Centnerman
  */
 
+@Data
+@NoArgsConstructor
 public class Product {
     private Long id;
     private String productName;
     private String description;
     private BigDecimal price;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Product() {
-    }
 
     public Product(Long id, String productName, String description, BigDecimal price) {
         this.id = id;

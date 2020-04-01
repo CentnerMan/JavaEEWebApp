@@ -30,14 +30,20 @@ public class AppListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+
         ServletContext ctx = sce.getServletContext();
-        String jdbcConnectionString = ctx.getInitParameter("jdbcConnectionString");
-        String dbUsername = ctx.getInitParameter("dbUsername");
-        String dbPassword = ctx.getInitParameter("dbPassword");
+//        String jdbcConnectionString = ctx.getInitParameter("jdbcConnectionString");
+//        String dbUsername = ctx.getInitParameter("dbUsername");
+//        String dbPassword = ctx.getInitParameter("dbPassword");
+        String url = "jdbc:mysql://localhost/javaee_test?serverTimezone=Europe/Moscow&useSSL=false";
+        String username = "root";
+        String password = "6585452";
 
         Connection connection = null;
+
         try {
-            connection = DriverManager.getConnection(jdbcConnectionString, dbUsername, dbPassword);
+            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+            connection = DriverManager.getConnection(url, username, password);
             ProductRepository repository = new ProductRepository(connection);
             ctx.setAttribute("connection", connection);
             ctx.setAttribute("productRepository", repository);
@@ -48,10 +54,9 @@ public class AppListener implements ServletContextListener {
                 repository.insert(new Product(-1L, "Product3", "Desc3", new BigDecimal(300)));
             }
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             logger.error("", e);
         }
-
     }
 
     @Override

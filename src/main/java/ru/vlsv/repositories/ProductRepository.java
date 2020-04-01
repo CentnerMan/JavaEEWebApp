@@ -4,7 +4,6 @@ import ru.vlsv.entity.Product;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,7 +16,6 @@ import java.util.List;
 
 public class ProductRepository {
     private final Connection connection;
-
 
     public ProductRepository(Connection connection) throws SQLException {
         this.connection = connection;

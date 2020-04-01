@@ -13,7 +13,7 @@
 </head>
 <body>
 <% for (int i = 0; i < 3; i++) { %>
-    <p>hello</p>
+    <p>Buy me, please</p>
 <% } %>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class CartServlet extends HttpServlet {
 //        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
         resp.getWriter().println("<h1>Cart</h1>");
         resp.getWriter().write("Only cart");
-//        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
+        getServletContext().getRequestDispatcher("/cart.jsp").include(req, resp);
 
     }
 
