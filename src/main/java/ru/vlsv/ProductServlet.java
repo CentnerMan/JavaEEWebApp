@@ -30,7 +30,7 @@ public class ProductSrevlet extends HttpServlet {
 //        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
         resp.getWriter().println("<h1>Product</h1>");
         resp.getWriter().write("One Product");
-//        getServletContext().getRequestDispatcher("/footer.html").include(req, resp);
+        getServletContext().getRequestDispatcher("/products.jsp").forward(req, resp);
     }
 
     @Override
