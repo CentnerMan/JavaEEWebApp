@@ -1,5 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="ru.vlsv.repositories.ProductRepository" %>
-<%@ page import="ru.vlsv.entity.Product" %><%--
+<%@ page import="ru.vlsv.entity.Product" %>
+<%@ page import="java.sql.SQLException" %><%--
+
   Created by IntelliJ IDEA.
   @author Anatoly Lebedev
   @link https://github.com/Centnerman
@@ -23,15 +26,37 @@
         <th>Description</th>
         <th>Price</th>
     </tr>
-    <% for (Product prod : repository.findAll()) { %>
-    <tr>
-        <th><%= prod.getId()%></th>
-        <th><%= prod.getProductName()%></th>
-        <th><%= prod.getDescription()%></th>
-        <th><%= prod.getPrice()%></th>
-    </tr>
+    <% try {
+        for (Product prod : repository.findAll()) { %>
+        <tr>
+            <th><%= prod.getId()%></th>
+            <th><%= prod.getProductName()%></th>
+            <th><%= prod.getDescription()%></th>
+            <th><%= prod.getPrice()%></th>
+        </tr>
 
-    <% } %>
+        <% }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } %>
+</table>
+<hr/>
+<table border="2">
+    <tr>
+        <th>Id</th>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+    <% request.setAttribute("products", repository.findAll()); %>
+    <c:forEach items="${products}" var="prod">
+        <tr>
+            <th>${prod.id}</th>
+            <th>${prod.productName}</th>
+            <th>${prod.description}</th>
+            <th>${prod.price}</th>
+        </tr>
+    </c:forEach>
 </table>
 
 </body>
