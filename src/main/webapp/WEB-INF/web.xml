@@ -4,5 +4,43 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-<display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
+
+    <context-param>
+        <param-name>jdbcConnectionString</param-name>
+        <param-value>jdbc:mysql://localhost:3306/javaee_test?createDatabaseIfNotExist</param-value>
+<!--        <param-value>"jdbc:mysql://localhost:3306/javaee_test?createDatabaseIfNotExist=true&characterEncoding=UTF-8&serverTimezone=UTC"</param-value>-->
+    </context-param>
+
+    <context-param>
+        <param-name>dbUsername</param-name>
+        <param-value>root</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>dbPassword</param-name>
+        <param-value>6585452</param-value>
+    </context-param>
+
+
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>ru.vlsv.CartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/403.html</location>
+    </error-page>
+
 </web-app>
