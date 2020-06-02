@@ -18,7 +18,7 @@ import java.io.IOException;
 @WebServlet(name = "BasicServlet", urlPatterns = "/basic_servlet")
 public class BasicServlet implements Servlet {
 
-    private static Logger logger = LoggerFactory.getLogger(BasicServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);
 
     private transient ServletConfig config;
 

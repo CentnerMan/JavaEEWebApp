@@ -22,7 +22,7 @@ import java.io.IOException;
 @WebServlet(name = "ProductServlet", urlPatterns = "/product")
 public class ProductSrevlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(BasicServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

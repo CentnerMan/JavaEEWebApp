@@ -20,7 +20,6 @@ public class HTTPFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
-
     }
 
     @Override
@@ -30,11 +29,9 @@ public class HTTPFilter implements Filter {
         filterConfig.getServletContext().getRequestDispatcher("/header.html").include(servletRequest, servletResponse);
         filterChain.doFilter(servletRequest, servletResponse);
         servletResponse.getWriter().println("<h2>Footer from filter</h2>");
-
     }
 
     @Override
     public void destroy() {
-
     }
 }
