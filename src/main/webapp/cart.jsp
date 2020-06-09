@@ -2,10 +2,10 @@
   Created by IntelliJ IDEA.
   @author Anatoly Lebedev
   @link https://github.com/Centnerman
-  Date: 01.04.2020 Time: 13:09
+  Date: 05.06.2020 Time: 13:09
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 
 <html>
 <head>

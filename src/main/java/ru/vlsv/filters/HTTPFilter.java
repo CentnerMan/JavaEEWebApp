@@ -8,7 +8,7 @@ import java.io.IOException;
  * GeekBrains Java, JavaEEWebApp.
  *
  * @author Anatoly Lebedev
- * @version 1.0.0 25.03.2020
+ * @version 1.0.0 05.06.2020
  * @link https://github.com/Centnerman
  */
 
@@ -20,14 +20,13 @@ public class HTTPFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
-
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         servletResponse.setCharacterEncoding("UTF-8");
         servletResponse.setContentType("text/html");
-//        servletResponse.setContentType("text/html; charset=UTF-8");
+//        servletResponse.setContentType("text/html; charset=UTF-8"); - 2 вариант
         servletResponse.getWriter().print("");
         filterConfig.getServletContext().getRequestDispatcher("/header.html").include(servletRequest, servletResponse);
 

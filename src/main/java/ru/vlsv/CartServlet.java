@@ -15,14 +15,14 @@ import java.io.IOException;
  * GeekBrains Java, JavaEEWebApp.
  *
  * @author Anatoly Lebedev
- * @version 1.0.0 24.03.2020
+ * @version 1.0.0 05.06.2020
  * @link https://github.com/Centnerman
  */
 
 //@WebServlet(name = "CartServlet", urlPatterns = "/cart")
 public class CartServlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(BasicServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class CartServlet extends HttpServlet {
         resp.getWriter().println("<h1>Cart</h1>");
         resp.getWriter().write("Only cart");
         getServletContext().getRequestDispatcher("/cart.jsp").include(req, resp);
-
+        logger.info("doGet //cart");
     }
 
     @Override

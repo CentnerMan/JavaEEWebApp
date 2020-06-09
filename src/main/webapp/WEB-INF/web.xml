@@ -6,6 +6,11 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
     <context-param>
         <param-name>jdbcConnectionString</param-name>
         <param-value>jdbc:mysql://localhost:3306/javaee_test?createDatabaseIfNotExist</param-value>
