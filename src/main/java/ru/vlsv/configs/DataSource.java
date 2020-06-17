@@ -1,4 +1,4 @@
-package ru.geekbrains.persist;
+package ru.vlsv.configs;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -8,6 +8,14 @@ import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+/**
+ * GeekBrains Java, JavaEEWebApp.
+ *
+ * @author Anatoly Lebedev
+ * @version 1.0.0 17.06.2020
+ * @link https://github.com/Centnerman
+ */
 
 @ApplicationScoped
 @Named

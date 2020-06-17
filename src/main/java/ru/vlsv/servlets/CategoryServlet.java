@@ -2,8 +2,6 @@ package ru.vlsv.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.vlsv.examples.BasicServlet;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,19 +17,17 @@ import java.io.IOException;
  * @link https://github.com/Centnerman
  */
 
-@WebServlet(name = "CartServlet", urlPatterns = "/cart")
-public class CartServlet extends HttpServlet {
+@WebServlet(name = "CategoryServlet", urlPatterns = "/category")
+public class CategoryServlet extends HttpServlet {
 
-    private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(CategoryServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setHeader("Content-type", "text/html; charset=utf-8");
-//        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
-        resp.getWriter().println("<h1>Cart</h1>");
-        resp.getWriter().write("Only cart");
+        resp.getWriter().println("<h1>Categories</h1>");
+        resp.getWriter().write("categories");
         getServletContext().getRequestDispatcher("/cart.jsp").include(req, resp);
-        logger.info("doGet //cart");
+        logger.info("doGet //categories");
     }
 
     @Override

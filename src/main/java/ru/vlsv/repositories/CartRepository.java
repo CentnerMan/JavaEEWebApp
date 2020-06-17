@@ -1,5 +1,8 @@
 package ru.vlsv.repositories;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+
 /**
  * GeekBrains Java, JavaEEWebApp.
  *
@@ -8,5 +11,7 @@ package ru.vlsv.repositories;
  * @link https://github.com/Centnerman
  */
 
-public class OrderRepository {
+@ApplicationScoped
+@Named
+public class CartRepository {
 }

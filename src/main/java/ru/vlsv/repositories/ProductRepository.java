@@ -1,7 +1,13 @@
 package ru.vlsv.repositories;
 
+import ru.vlsv.configs.DataSource;
 import ru.vlsv.entity.Product;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +20,30 @@ import java.util.List;
  * @link https://github.com/Centnerman
  */
 
+@ApplicationScoped
+@Named
 public class ProductRepository {
-    private final Connection conn;
+    private Connection conn;
 
-    public ProductRepository(Connection conn) throws SQLException {
-        this.conn = conn;
+    @Inject
+    private DataSource dataSource;
+
+    @PostConstruct
+    public void init() throws SQLException {
+        this.conn = dataSource.getConnection();
         createTableIfNotExists(conn);
+
+        if (findAll().size() == 0) {
+            insert(new Product(-1L, "Product1", "Desc1", new BigDecimal(10)));
+            insert(new Product(-1L, "Product2", "Desc2", new BigDecimal(102)));
+            insert(new Product(-1L, "Product3", "Desc3", new BigDecimal(1030)));
+            insert(new Product(-1L, "Product4", "Desc4", new BigDecimal(140)));
+        }
     }
 
     public void insert(Product product) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement(
-                "insert into `products`(`name`, `description`, `price`) values (?, ?, ?);")) {
+                "insert into products(`name`, `description`, `price`) values (?, ?, ?);")) {
             stmt.setString(1, product.getName());
             stmt.setString(2, product.getDescription());
             stmt.setBigDecimal(3, product.getPrice());
@@ -34,7 +53,7 @@ public class ProductRepository {
 
     public void update(Product product) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement(
-                "update `products` set `name` = ?, `description` = ?, `price` = ? where `id` = ?;")) {
+                "update products set `name` = ?, `description` = ?, `price` = ? where `id` = ?;")) {
             stmt.setString(1, product.getName());
             stmt.setString(2, product.getDescription());
             stmt.setBigDecimal(3, product.getPrice());
@@ -45,7 +64,7 @@ public class ProductRepository {
 
     public void delete(long id) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement(
-                "delete from `products` where id = ?;")) {
+                "delete from products where id = ?;")) {
             stmt.setLong(1, id);
             stmt.execute();
         }
@@ -58,8 +77,8 @@ public class ProductRepository {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return new Product(rs.getLong(1), rs.getString(2),
-                        rs.getString(3), rs.getBigDecimal(4));
+                return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
+                        rs.getBigDecimal(4));
             }
         }
         return new Product(-1L, "", "", null);
@@ -71,8 +90,8 @@ public class ProductRepository {
             ResultSet rs = stmt.executeQuery("select `id`, `name`, `description`, `price` from `products`");
 
             while (rs.next()) {
-                res.add(new Product(rs.getLong(1), rs.getString(2),
-                        rs.getString(3), rs.getBigDecimal(4)));
+                res.add(new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
+                        rs.getBigDecimal(4)));
             }
         }
         return res;

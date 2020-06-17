@@ -27,13 +27,12 @@ public class HTTPFilter implements Filter {
             throws IOException, ServletException {
         servletResponse.setCharacterEncoding("UTF-8");
         servletResponse.setContentType("text/html");
-//        servletResponse.setContentType("text/html; charset=UTF-8"); - 2 вариант
         servletResponse.getWriter().print("");
-        filterConfig.getServletContext().getRequestDispatcher("/WEB-INF/header.html").include(servletRequest, servletResponse);
+//        filterConfig.getServletContext().getRequestDispatcher("/WEB-INF/header.html").include(servletRequest, servletResponse);
 
         filterChain.doFilter(servletRequest, servletResponse);
 
-        filterConfig.getServletContext().getRequestDispatcher("/WEB-INF/footer.html").include(servletRequest, servletResponse);
+//        filterConfig.getServletContext().getRequestDispatcher("/WEB-INF/footer.html").include(servletRequest, servletResponse);
     }
 
     @Override

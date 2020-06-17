@@ -27,17 +27,16 @@
         <param-value>6585452</param-value>
     </context-param>
 
-<!--    <servlet>-->
-<!--        <servlet-name>faces-servlet</servlet-name>-->
-<!--        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>-->
-<!--        <load-on-startup>1</load-on-startup>-->
-<!--    </servlet>-->
+    <servlet>
+        <servlet-name>faces-servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>faces-servlet</servlet-name>-->
-<!--        <url-pattern>*.xhtml</url-pattern>-->
-<!--    </servlet-mapping>-->
-
+    <servlet-mapping>
+        <servlet-name>faces-servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
 
     <error-page>
         <error-code>404</error-code>

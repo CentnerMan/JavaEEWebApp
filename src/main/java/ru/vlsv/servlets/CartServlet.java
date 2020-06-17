@@ -18,9 +18,9 @@ import java.io.IOException;
  */
 
 @WebServlet(name = "OrderServlet", urlPatterns = "/order")
-public class OrderServlet extends HttpServlet {
+public class CartServlet extends HttpServlet {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(CartServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

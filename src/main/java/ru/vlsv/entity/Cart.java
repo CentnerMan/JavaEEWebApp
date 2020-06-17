@@ -16,7 +16,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class Order {
+public class Cart {
     private int id;
     private List<ProductsInCart> cartList;
 

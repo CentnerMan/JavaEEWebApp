@@ -3,9 +3,7 @@ package ru.vlsv.servlets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.vlsv.entity.Product;
-import ru.vlsv.examples.BasicServlet;
 import ru.vlsv.repositories.ProductRepository;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,23 +21,8 @@ import java.sql.SQLException;
  * @link https://github.com/Centnerman
  */
 
-//@WebServlet(name = "ProductServlet", urlPatterns = "/product/*")
 @WebServlet(name = "ProductServlet", urlPatterns = {"/", ""})
 public class ProductServlet extends HttpServlet {
-//
-//    private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);
-//
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.getWriter().println("<h1>Product</h1>");
-//        resp.getWriter().write("One Product");
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        super.doPost(req, resp);
-//    }
-
 
     private final Logger logger = LoggerFactory.getLogger(ProductServlet.class);
 
@@ -57,9 +40,9 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            if (req.getServletPath().equals("/product")) {
+            if (req.getServletPath().equals("/")) {
                 req.setAttribute("products", productRepository.findAll());
-                getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+                getServletContext().getRequestDispatcher("/index.xhtml").forward(req, resp);
             } else if (req.getServletPath().equals("/create")) {
                 showCreateProductPage(req, resp);
             } else if (req.getServletPath().equals("/edit")) {
@@ -152,12 +135,12 @@ public class ProductServlet extends HttpServlet {
         }
         req.setAttribute("product", product);
         req.setAttribute("action", "update");
-        getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/product.xhtml").forward(req, resp);
     }
 
     private void showCreateProductPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("product", new Product());
         req.setAttribute("action", "create");
-        getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/product.xhtml").forward(req, resp);
     }
 }
