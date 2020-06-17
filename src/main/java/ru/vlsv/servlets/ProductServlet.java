@@ -23,23 +23,8 @@ import java.sql.SQLException;
  * @link https://github.com/Centnerman
  */
 
-//@WebServlet(name = "ProductServlet", urlPatterns = "/product/*")
 @WebServlet(name = "ProductServlet", urlPatterns = {"/", ""})
 public class ProductServlet extends HttpServlet {
-//
-//    private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);
-//
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.getWriter().println("<h1>Product</h1>");
-//        resp.getWriter().write("One Product");
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        super.doPost(req, resp);
-//    }
-
 
     private final Logger logger = LoggerFactory.getLogger(ProductServlet.class);
 
