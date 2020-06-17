@@ -1,7 +1,8 @@
-package ru.vlsv.examples;
+package ru.vlsv.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.vlsv.examples.BasicServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,26 +15,27 @@ import java.io.IOException;
  * GeekBrains Java, JavaEEWebApp.
  *
  * @author Anatoly Lebedev
- * @version 1.0.0 24.03.2020
+ * @version 1.0.0 05.06.2020
  * @link https://github.com/Centnerman
  */
 
-@WebServlet(name = "FirstServlet", urlPatterns = "/first_servlet")
-public class FirstServlet extends HttpServlet {
+@WebServlet(name = "CartServlet", urlPatterns = "/cart")
+public class CartServlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(FirstServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("New GET request");
-
-        resp.getWriter().printf("<h1>New GET request</h1>");
+//        resp.setHeader("Content-type", "text/html; charset=utf-8");
+//        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
+        resp.getWriter().println("<h1>Cart</h1>");
+        resp.getWriter().write("Only cart");
+        getServletContext().getRequestDispatcher("/cart.jsp").include(req, resp);
+        logger.info("doGet //cart");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        logger.info("New POST request");
-
-        resp.getWriter().printf("<h1>New POST request</h1>");
+        super.doPost(req, resp);
     }
 }
