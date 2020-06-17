@@ -19,18 +19,19 @@ import java.io.IOException;
  * @link https://github.com/Centnerman
  */
 
-@WebServlet(name = "ProductServlet", urlPatterns = "/product")
-public class ProductServlet extends HttpServlet {
+@WebServlet(name = "OrderServlet", urlPatterns = "/order")
+public class OrderServlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(BasicServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        resp.setHeader("Content-type", "text/html; charset=utf-8");
 //        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
-        resp.getWriter().println("<h1>Product</h1>");
-        resp.getWriter().write("One Product");
-//        getServletContext().getRequestDispatcher("/products.jsp").include(req, resp);
+        resp.getWriter().println("<h1>Order</h1>");
+        resp.getWriter().write("The Order");
+        getServletContext().getRequestDispatcher("/order.jsp").include(req, resp);
+
     }
 
     @Override
