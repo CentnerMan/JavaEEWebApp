@@ -25,7 +25,7 @@ public class HTTPFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         servletResponse.setCharacterEncoding("UTF-8");
-        servletResponse.setContentType("text/html");
+//        servletResponse.setContentType("text/html");
 //        servletResponse.setContentType("text/html; charset=UTF-8"); - 2 вариант
         servletResponse.getWriter().print("");
         filterConfig.getServletContext().getRequestDispatcher("/header.html").include(servletRequest, servletResponse);

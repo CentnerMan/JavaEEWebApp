@@ -26,7 +26,7 @@ import java.sql.SQLException;
 @WebListener
 public class AppListener implements ServletContextListener {
 
-    private static Logger logger = LoggerFactory.getLogger(AppListener.class);
+    private static final Logger logger = LoggerFactory.getLogger(AppListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

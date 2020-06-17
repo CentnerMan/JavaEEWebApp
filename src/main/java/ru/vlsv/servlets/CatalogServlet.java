@@ -1,4 +1,4 @@
-package ru.vlsv;
+package ru.vlsv.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class CatalogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.getWriter().println("<h1>Catalog</h1>");
         resp.getWriter().write("Products catalog");
-        getServletContext().getRequestDispatcher("/product.jsp").include(req, resp);
+        getServletContext().getRequestDispatcher("/products.jsp").include(req, resp);
     }
 
     @Override

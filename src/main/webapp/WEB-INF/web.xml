@@ -9,12 +9,12 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
     <context-param>
         <param-name>jdbcConnectionString</param-name>
-        <param-value>jdbc:mysql://localhost:3306/javaee_test?createDatabaseIfNotExist</param-value>
-<!--        <param-value>"jdbc:mysql://localhost:3306/javaee_test?createDatabaseIfNotExist=true&characterEncoding=UTF-8&serverTimezone=UTC"</param-value>-->
+        <param-value>jdbc:mysql://localhost:3306/javaee_test_db?createDatabaseIfNotExist</param-value>
     </context-param>
 
     <context-param>
@@ -27,16 +27,17 @@
         <param-value>6585452</param-value>
     </context-param>
 
+<!--    <servlet>-->
+<!--        <servlet-name>faces-servlet</servlet-name>-->
+<!--        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>-->
+<!--        <load-on-startup>1</load-on-startup>-->
+<!--    </servlet>-->
 
-    <servlet>
-        <servlet-name>CartServlet</servlet-name>
-        <servlet-class>ru.vlsv.CartServlet</servlet-class>
-    </servlet>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>faces-servlet</servlet-name>-->
+<!--        <url-pattern>*.xhtml</url-pattern>-->
+<!--    </servlet-mapping>-->
 
-    <servlet-mapping>
-        <servlet-name>CartServlet</servlet-name>
-        <url-pattern>/cart</url-pattern>
-    </servlet-mapping>
 
     <error-page>
         <error-code>404</error-code>

@@ -1,4 +1,4 @@
-package ru.vlsv;
+package ru.vlsv.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ import java.io.IOException;
  * @link https://github.com/Centnerman
  */
 
-//@WebServlet(name = "CartServlet", urlPatterns = "/cart")
+@WebServlet(name = "CartServlet", urlPatterns = "/cart")
 public class CartServlet extends HttpServlet {
 
     private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);

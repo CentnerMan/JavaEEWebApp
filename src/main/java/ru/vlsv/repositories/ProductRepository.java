@@ -24,7 +24,7 @@ public class ProductRepository {
 
     public void insert(Product product) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into products (`name`, `description`, `price`) values (?,?,?);")) {
+                "insert into `products` (`name`, `description`, `price`) values (?,?,?);")) {
             preparedStatement.setString(1, product.getProductName());
             preparedStatement.setString(2, product.getDescription());
             preparedStatement.setBigDecimal(3, product.getPrice());
@@ -34,7 +34,7 @@ public class ProductRepository {
 
     public void update(Product product) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "update products set `name` = ?, `'description` = ?, `price` = ? where `id` = ?;")) {
+                "update `products` set `name` = ?, `'description` = ?, `price` = ? where `id` = ?;")) {
             preparedStatement.setString(1, product.getProductName());
             preparedStatement.setString(2, product.getDescription());
             preparedStatement.setBigDecimal(3, product.getPrice());
@@ -45,7 +45,7 @@ public class ProductRepository {
 
     public void delete(Long id) throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "delete from products where `id` = ?;")) {
+                "delete from `products` where `id` = ?;")) {
             preparedStatement.setLong(1, id);
             preparedStatement.execute();
         }
