@@ -31,7 +31,7 @@
         for (Product prod : repository.findAll()) { %>
     <tr>
         <th><%=prod.getId()%></th>
-        <th><%=prod.getProductName()%></th>
+        <th><%=prod.getName()%></th>
         <th><%=prod.getDescription()%></th>
         <th><%=prod.getPrice()%></th>
     </tr>
@@ -41,24 +41,24 @@
     } %>
 </table>
 
-<%--<hr/>--%>
-<%--<table border="2">--%>
-<%--    <tr>--%>
-<%--        <th>Id</th>--%>
-<%--        <th>Product Name</th>--%>
-<%--        <th>Description</th>--%>
-<%--        <th>Price</th>--%>
-<%--    </tr>--%>
-<%--    <% request.setAttribute("products", repository.findAll()); %>--%>
-<%--    <c:forEach items="${products}" var="prod">--%>
-<%--        <tr>--%>
-<%--            <th>${prod.id}</th>--%>
-<%--            <th>${prod.productName}</th>--%>
-<%--            <th>${prod.description}</th>--%>
-<%--            <th>${prod.price}</th>--%>
-<%--        </tr>--%>
-<%--    </c:forEach>--%>
-<%--</table>--%>
+<hr/>
+<table border="2">
+    <tr>
+        <th>Id</th>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+    <% request.setAttribute("products", repository.findAll()); %>
+    <c:forEach items="${products}" var="prod">
+        <tr>
+            <th>${prod.id}</th>
+            <th>${prod.name}</th>
+            <th>${prod.description}</th>
+            <th>${prod.price}</th>
+        </tr>
+    </c:forEach>
+</table>
 
 </body>
 </html>

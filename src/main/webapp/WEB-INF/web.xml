@@ -14,7 +14,7 @@
 
     <context-param>
         <param-name>jdbcConnectionString</param-name>
-        <param-value>jdbc:mysql://localhost:3306/javaee_test_db?createDatabaseIfNotExist</param-value>
+        <param-value>jdbc:mysql://localhost:3306/javaee_test_db?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</param-value>
     </context-param>
 
     <context-param>
@@ -41,12 +41,12 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/404.html</location>
+        <location>/WEB-INF/404.html</location>
     </error-page>
 
     <error-page>
         <error-code>403</error-code>
-        <location>/403.html</location>
+        <location>/WEB-INF/403.html</location>
     </error-page>
 
 </web-app>
