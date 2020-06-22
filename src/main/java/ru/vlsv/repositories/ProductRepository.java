@@ -1,111 +1,50 @@
-package ru.vlsv.repositories;
+package ru.geekbrains.persist;
 
-import ru.vlsv.configs.DataSource;
-import ru.vlsv.entity.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.math.BigDecimal;
-import java.sql.*;
-import java.util.ArrayList;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
-/**
- * GeekBrains Java, JavaEEWebApp.
- *
- * @author Anatoly Lebedev
- * @version 1.0.0 01.04.2020
- * @link https://github.com/Centnerman
- */
+@Stateless
+public class ProductRepositoryImpl implements ProductRepository {
 
-@ApplicationScoped
-@Named
-public class ProductRepository {
-    private Connection conn;
+    private static final Logger logger = LoggerFactory.getLogger(ProductRepositoryImpl.class);
 
-    @Inject
-    private DataSource dataSource;
+    @PersistenceContext(unitName = "ds")
+    private EntityManager em;
 
-    @PostConstruct
-    public void init() throws SQLException {
-        this.conn = dataSource.getConnection();
-        createTableIfNotExists(conn);
+    @Override
+    @TransactionAttribute
+    public void insert(Product product) {
+        em.persist(product);
+    }
 
-        if (findAll().size() == 0) {
-            insert(new Product(-1L, "Product1", "Desc1", new BigDecimal(10)));
-            insert(new Product(-1L, "Product2", "Desc2", new BigDecimal(102)));
-            insert(new Product(-1L, "Product3", "Desc3", new BigDecimal(1030)));
-            insert(new Product(-1L, "Product4", "Desc4", new BigDecimal(140)));
+    @Override
+    @TransactionAttribute
+    public void update(Product product) {
+        em.merge(product);
+    }
+
+    @Override
+    @TransactionAttribute
+    public void delete(long id) {
+        Product product = em.find(Product.class, id);
+        if (product != null) {
+            em.remove(product);
         }
     }
 
-    public void insert(Product product) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement(
-                "insert into products(`name`, `description`, `price`) values (?, ?, ?);")) {
-            stmt.setString(1, product.getName());
-            stmt.setString(2, product.getDescription());
-            stmt.setBigDecimal(3, product.getPrice());
-            stmt.execute();
-        }
+    @Override
+    public Product findById(long id) {
+        return em.find(Product.class, id);
     }
 
-    public void update(Product product) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement(
-                "update products set `name` = ?, `description` = ?, `price` = ? where `id` = ?;")) {
-            stmt.setString(1, product.getName());
-            stmt.setString(2, product.getDescription());
-            stmt.setBigDecimal(3, product.getPrice());
-            stmt.setLong(4, product.getId());
-            stmt.execute();
-        }
+    @Override
+    public List<Product> findAll() {
+        return em.createQuery("from Product", Product.class).getResultList();
     }
-
-    public void delete(long id) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement(
-                "delete from products where id = ?;")) {
-            stmt.setLong(1, id);
-            stmt.execute();
-        }
-    }
-
-    public Product findById(long id) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement(
-                "select `id`, `name`, `description`, `price` from `products` where `id` = ?")) {
-            stmt.setLong(1, id);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                return new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
-                        rs.getBigDecimal(4));
-            }
-        }
-        return new Product(-1L, "", "", null);
-    }
-
-    public List<Product> findAll() throws SQLException {
-        List<Product> res = new ArrayList<>();
-        try (Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery("select `id`, `name`, `description`, `price` from `products`");
-
-            while (rs.next()) {
-                res.add(new Product(rs.getLong(1), rs.getString(2), rs.getString(3),
-                        rs.getBigDecimal(4)));
-            }
-        }
-        return res;
-    }
-
-    private void createTableIfNotExists(Connection conn) throws SQLException {
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute("create table if not exists `products` (\n" +
-                    "    `id` int auto_increment primary key,\n" +
-                    "    `name` varchar(25),\n" +
-                    "    `description` varchar(25),\n" +
-                    "    `price` decimal(19, 2) \n" +
-                    ");");
-        }
-    }
-
 }
