@@ -3,7 +3,6 @@ package ru.vlsv.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +16,9 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Cart {
+
     private int id;
-    private List<ProductsInCart> cartList;
+
+    private List<ProductInCart> cartList;
 
 }

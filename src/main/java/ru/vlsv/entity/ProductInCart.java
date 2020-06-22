@@ -3,7 +3,6 @@ package ru.vlsv.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -16,13 +15,13 @@ import java.util.Objects;
 
 @Data
 @NoArgsConstructor
-public class ProductsInCart {
+public class ProductInCart {
 
     private Product product;
 
     int count;
 
-    public ProductsInCart(Product product) {
+    public ProductInCart(Product product) {
         this.product = product;
     }
 
@@ -30,7 +29,7 @@ public class ProductsInCart {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductsInCart that = (ProductsInCart) o;
+        ProductInCart that = (ProductInCart) o;
         return product.equals(that.product);
     }
 

@@ -1,5 +1,15 @@
 package ru.vlsv.services;
 
+import ru.vlsv.entity.Product;
+import ru.vlsv.repositories.ProductRepository;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.Transient;
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * GeekBrains Java, JavaEEWebApp.
  *
@@ -8,5 +18,30 @@ package ru.vlsv.services;
  * @link https://github.com/Centnerman
  */
 
-public class ProductService {
+@Named
+@SessionScoped
+public class ProductService implements Serializable {
+
+    @Inject
+    private ProductRepository productRepository;
+
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
+    @Transient
+    public void insert(Product product) {
+        productRepository.insert(product);
+    }
+
+    @Transient
+    public void update(Product product) {
+        productRepository.update(product);
+    }
+
+    @Transient
+    public void delete(Long id) {
+        productRepository.delete(id);
+    }
+
 }

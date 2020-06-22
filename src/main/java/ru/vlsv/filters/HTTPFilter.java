@@ -12,7 +12,7 @@ import java.io.IOException;
  * @link https://github.com/Centnerman
  */
 
-@WebFilter(filterName = "HeaderFooter", urlPatterns = "/*")
+//@WebFilter(filterName = "HeaderFooter", urlPatterns = "/*")
 public class HTTPFilter implements Filter {
 
     private FilterConfig filterConfig;
@@ -27,7 +27,7 @@ public class HTTPFilter implements Filter {
             throws IOException, ServletException {
         servletResponse.setCharacterEncoding("UTF-8");
         servletResponse.setContentType("text/html");
-        servletResponse.getWriter().print("");
+//        servletResponse.getWriter().print("");
 //        filterConfig.getServletContext().getRequestDispatcher("/WEB-INF/header.html").include(servletRequest, servletResponse);
 
         filterChain.doFilter(servletRequest, servletResponse);

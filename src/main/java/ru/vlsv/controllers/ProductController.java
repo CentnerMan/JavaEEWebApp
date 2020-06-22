@@ -2,6 +2,7 @@ package ru.vlsv.controllers;
 
 import ru.vlsv.entity.Product;
 import ru.vlsv.repositories.ProductRepository;
+import ru.vlsv.services.ProductService;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -10,12 +11,12 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-@SessionScoped
 @Named
+@SessionScoped
 public class ProductController implements Serializable {
 
     @Inject
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     private Product product;
 
@@ -32,8 +33,8 @@ public class ProductController implements Serializable {
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public List<Product> getAllProduct() throws SQLException {
-        return productRepository.findAll();
+    public List<Product> getAllProduct() {
+        return productService.findAll();
     }
 
     public String editProduct(Product product) {
@@ -41,17 +42,18 @@ public class ProductController implements Serializable {
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public void deleteProduct(Product product) throws SQLException {
-        productRepository.delete(product.getId());
+    public void deleteProduct(Product product)  {
+        productService.delete(product.getId());
         //return "/index.xhtml?faces-redirect=true";
     }
 
-    public String saveProduct() throws SQLException {
+    public String saveProduct()  {
         if (product.getId() == null) {
-            productRepository.insert(product);
+            productService.insert(product);
         } else {
-            productRepository.update(product);
+            productService.update(product);
         }
         return "/index.xhtml?faces-redirect=true";
     }
 }
+
