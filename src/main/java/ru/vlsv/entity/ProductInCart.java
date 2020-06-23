@@ -19,7 +19,7 @@ public class ProductInCart {
 
     private Product product;
 
-    int count;
+    Integer count;
 
     public ProductInCart(Product product) {
         this.product = product;
