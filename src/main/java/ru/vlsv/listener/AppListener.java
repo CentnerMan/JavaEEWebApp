@@ -3,7 +3,6 @@ package ru.vlsv.listener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.vlsv.entity.Product;
-import ru.vlsv.examples.BasicServlet;
 import ru.vlsv.repositories.ProductRepository;
 
 import javax.servlet.ServletContext;
@@ -19,48 +18,39 @@ import java.sql.SQLException;
  * GeekBrains Java, JavaEEWebApp.
  *
  * @author Anatoly Lebedev
- * @version 1.0.0 01.04.2020
+ * @version 1.0.0 05.06.2020
  * @link https://github.com/Centnerman
  */
 
 @WebListener
 public class AppListener implements ServletContextListener {
 
-    private static Logger logger = LoggerFactory.getLogger(AppListener.class);
+    private final Logger logger = LoggerFactory.getLogger(AppListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-
         ServletContext ctx = sce.getServletContext();
-//        String jdbcConnectionString = ctx.getInitParameter("jdbcConnectionString");
-//        String dbUsername = ctx.getInitParameter("dbUsername");
-//        String dbPassword = ctx.getInitParameter("dbPassword");
-        String url = "jdbc:mysql://localhost/javaee_test?serverTimezone=Europe/Moscow&useSSL=false";
-        String username = "root";
-        String password = "6585452";
 
-        Connection connection = null;
+        String jdbcConnectionString = ctx.getInitParameter("jdbcConnectionString");
+        String dbUsername = ctx.getInitParameter("dbUsername");
+        String dbPassword = ctx.getInitParameter("dbPassword");
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            connection = DriverManager.getConnection(url, username, password);
-            ProductRepository repository = new ProductRepository(connection);
-            ctx.setAttribute("connection", connection);
-            ctx.setAttribute("productRepository", repository);
+            Connection conn = DriverManager.getConnection(jdbcConnectionString, dbUsername, dbPassword);
+            ProductRepository productRepository = new ProductRepository(conn);
+            ctx.setAttribute("connection", conn);
+            ctx.setAttribute("productRepository", productRepository);
 
-            if (repository.findAll().size() == 0) {
-                repository.insert(new Product(-1L, "Product1", "Desc1", new BigDecimal(100)));
-                repository.insert(new Product(-1L, "Product2", "Desc2", new BigDecimal(200)));
-                repository.insert(new Product(-1L, "Product3", "Desc3", new BigDecimal(300)));
+            System.out.println(jdbcConnectionString + " " + dbUsername + " " +  dbPassword);
+
+            if (productRepository.findAll().size() == 0) {
+                productRepository.insert(new Product(-1L, "Product1", "Desc1", new BigDecimal(10)));
+                productRepository.insert(new Product(-1L, "Product2", "Desc2", new BigDecimal(102)));
+                productRepository.insert(new Product(-1L, "Product3", "Desc3", new BigDecimal(1030)));
+                productRepository.insert(new Product(-1L, "Product4", "Desc4", new BigDecimal(140)));
             }
-
-        } catch (Exception e) {
-            logger.error("", e);
+        } catch (SQLException ex) {
+            logger.error("", ex);
         }
-    }
-
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-
     }
 }

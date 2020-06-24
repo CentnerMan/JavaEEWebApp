@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="ru.vlsv.repositories.ProductRepository" %>
 <%@ page import="ru.vlsv.entity.Product" %>
 <%@ page import="java.sql.SQLException" %><%--
@@ -6,10 +7,10 @@
   Created by IntelliJ IDEA.
   @author Anatoly Lebedev
   @link https://github.com/Centnerman
-  Date: 01.04.2020 Time: 13:09
+  Date: 05.06.2020 Time: 13:09
 --%>
 
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 
 <html>
 <head>
@@ -28,18 +29,18 @@
     </tr>
     <% try {
         for (Product prod : repository.findAll()) { %>
-        <tr>
-            <th><%= prod.getId()%></th>
-            <th><%= prod.getProductName()%></th>
-            <th><%= prod.getDescription()%></th>
-            <th><%= prod.getPrice()%></th>
-        </tr>
-
-        <% }
+    <tr>
+        <th><%=prod.getId()%></th>
+        <th><%=prod.getName()%></th>
+        <th><%=prod.getDescription()%></th>
+        <th><%=prod.getPrice()%></th>
+    </tr>
+    <% }
     } catch (SQLException e) {
         e.printStackTrace();
     } %>
 </table>
+
 <hr/>
 <table border="2">
     <tr>
@@ -52,7 +53,7 @@
     <c:forEach items="${products}" var="prod">
         <tr>
             <th>${prod.id}</th>
-            <th>${prod.productName}</th>
+            <th>${prod.name}</th>
             <th>${prod.description}</th>
             <th>${prod.price}</th>
         </tr>

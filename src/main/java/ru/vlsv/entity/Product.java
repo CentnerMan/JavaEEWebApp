@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * GeekBrains Java, JavaEEWebApp.
  *
  * @author Anatoly Lebedev
- * @version 1.0.0 01.04.2020
+ * @version 1.0.0 05.06.2020
  * @link https://github.com/Centnerman
  */
 
@@ -17,13 +17,13 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Product {
     private Long id;
-    private String productName;
+    private String name;
     private String description;
     private BigDecimal price;
 
-    public Product(Long id, String productName, String description, BigDecimal price) {
+    public Product(Long id, String name, String description, BigDecimal price) {
         this.id = id;
-        this.productName = productName;
+        this.name = name;
         this.description = description;
         this.price = price;
     }

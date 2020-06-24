@@ -15,76 +15,76 @@ import java.util.List;
  */
 
 public class ProductRepository {
-    private final Connection connection;
+    private final Connection conn;
 
-    public ProductRepository(Connection connection) throws SQLException {
-        this.connection = connection;
-        createTableIfNotExist(connection);
+    public ProductRepository(Connection conn) throws SQLException {
+        this.conn = conn;
+        createTableIfNotExists(conn);
     }
 
     public void insert(Product product) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "insert into products (`name`, `description`, `price`) values (?,?,?);")) {
-            preparedStatement.setString(1, product.getProductName());
-            preparedStatement.setString(2, product.getDescription());
-            preparedStatement.setBigDecimal(3, product.getPrice());
-            preparedStatement.execute();
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "insert into `products`(`name`, `description`, `price`) values (?, ?, ?);")) {
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setBigDecimal(3, product.getPrice());
+            stmt.execute();
         }
     }
 
     public void update(Product product) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "update products set `name` = ?, `'description` = ?, `price` = ? where `id` = ?;")) {
-            preparedStatement.setString(1, product.getProductName());
-            preparedStatement.setString(2, product.getDescription());
-            preparedStatement.setBigDecimal(3, product.getPrice());
-            preparedStatement.setLong(4, product.getId());
-            preparedStatement.execute();
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "update `products` set `name` = ?, `description` = ?, `price` = ? where `id` = ?;")) {
+            stmt.setString(1, product.getName());
+            stmt.setString(2, product.getDescription());
+            stmt.setBigDecimal(3, product.getPrice());
+            stmt.setLong(4, product.getId());
+            stmt.execute();
         }
     }
 
-    public void delete(Long id) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "delete from products where `id` = ?;")) {
-            preparedStatement.setLong(1, id);
-            preparedStatement.execute();
+    public void delete(long id) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "delete from `products` where id = ?;")) {
+            stmt.setLong(1, id);
+            stmt.execute();
         }
     }
 
-    public Product findById(Long id) throws SQLException {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "select `id`, `name`, `description`, `price` from `products` where `id`= ?;")) {
-            preparedStatement.setLong(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return new Product(resultSet.getLong(1), resultSet.getString(2),
-                        resultSet.getString(3), resultSet.getBigDecimal(4));
+    public Product findById(long id) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement(
+                "select `id`, `name`, `description`, `price` from `products` where `id` = ?")) {
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Product(rs.getLong(1), rs.getString(2),
+                        rs.getString(3), rs.getBigDecimal(4));
             }
-            return new Product(-1L, "", "", null);
         }
+        return new Product(-1L, "", "", null);
     }
 
     public List<Product> findAll() throws SQLException {
-        List<Product> productList = new ArrayList<>();
-        try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(
-                    "select `id`, `name`, `description`, `price` from `products`");
+        List<Product> res = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery("select `id`, `name`, `description`, `price` from `products`");
 
-            while (resultSet.next()) {
-                productList.add(new Product(resultSet.getLong(1), resultSet.getString(2),
-                        resultSet.getString(3), resultSet.getBigDecimal(4)));
+            while (rs.next()) {
+                res.add(new Product(rs.getLong(1), rs.getString(2),
+                        rs.getString(3), rs.getBigDecimal(4)));
             }
-            return productList;
         }
+        return res;
     }
 
-    private void createTableIfNotExist(Connection connection) throws SQLException {
-        try (Statement statement = connection.createStatement();) {
-            statement.execute("create table if not exists `products` (\n" +
-                    "`id` int auto_increment primary key, \n" +
-                    "`name` varchar(25), \n" +
-                    "`description` varchar(50), \n " +
-                    "`price` decimal(19,2) \n" +
+    private void createTableIfNotExists(Connection conn) throws SQLException {
+        try (Statement stmt = conn.createStatement()) {
+            stmt.execute("create table if not exists `products` (\n" +
+                    "    `id` int auto_increment primary key,\n" +
+                    "    `name` varchar(25),\n" +
+                    "    `description` varchar(25),\n" +
+                    "    `price` decimal(19, 2) \n" +
                     ");");
         }
     }

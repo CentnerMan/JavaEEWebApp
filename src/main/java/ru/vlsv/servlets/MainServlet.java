@@ -1,4 +1,4 @@
-package ru.vlsv;
+package ru.vlsv.servlets;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,22 +15,21 @@ import java.io.IOException;
  * GeekBrains Java, JavaEEWebApp.
  *
  * @author Anatoly Lebedev
- * @version 1.0.0 24.03.2020
+ * @version 1.0.0 05.06.2020
  * @link https://github.com/Centnerman
  */
 
-@WebServlet(name = "ProductServlet", urlPatterns = "/product")
-public class ProductServlet extends HttpServlet {
+@WebServlet(name = "MainServlet", urlPatterns = "/main")
+public class MainServlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(BasicServlet.class);
+    private static final Logger logger = LoggerFactory.getLogger(BasicServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        resp.setHeader("Content-type", "text/html; charset=utf-8");
-//        getServletContext().getRequestDispatcher("/header.html").include(req, resp);
-        resp.getWriter().println("<h1>Product</h1>");
-        resp.getWriter().write("One Product");
-//        getServletContext().getRequestDispatcher("/products.jsp").include(req, resp);
+        logger.info("New Get request with includes");
+        resp.getWriter().println("<h1>Main - Главная</h1>");
+        resp.getWriter().write("text");
+        getServletContext().getRequestDispatcher("/about.jsp").include(req, resp);
     }
 
     @Override
