@@ -3,6 +3,9 @@ package ru.vlsv.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.List;
 
 /**
@@ -17,6 +20,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Cart {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private List<ProductInCart> cartList;

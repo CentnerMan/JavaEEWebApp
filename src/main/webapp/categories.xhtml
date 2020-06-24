@@ -11,12 +11,12 @@
 <h:body>
 
     <ui:include src="WEB-INF/header.xhtml">
-        <ui:param name="page" value="category"/>
+        <ui:param name="page" value="categories"/>
     </ui:include>
 
     <div class="container">
         <div class="row py-2">
-            <h:form id="categoryForm">
+            <h:form id="categoriesForm">
                 <div class="col-12">
                     <h:commandButton value="Add category" styleClass="btn btn-primary"
                                      action="#{categoryControler.createCategory}"/>
@@ -35,11 +35,13 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">Actions</f:facet>
-                            <h:commandButton value="Edit" action="#{categoryControler.editCategory(category)}"
+                            <h:commandButton value="Edit"
+                                             action="#{categoryControler.editCategory(category)}"
                                              styleClass="btn btn-success mr-1"/>
-                            <h:commandButton value="Delete" action="#{categoryControler.deleteCategory(category)}"
+                            <h:commandButton value="Delete"
+                                             action="#{categoryControler.deleteCategory(category)}"
                                              styleClass="btn btn-danger">
-                                <f:ajax event="click" render="categoryForm"/>
+                                <f:ajax event="click" render="categoriesForm"/>
                             </h:commandButton>
                         </h:column>
                     </h:dataTable>
