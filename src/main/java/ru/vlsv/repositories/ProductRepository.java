@@ -3,6 +3,7 @@ package ru.vlsv.repositories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.vlsv.entity.Product;
+import ru.vlsv.entity.ProductDTO;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -22,26 +23,6 @@ public class ProductRepository {
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
-
-//    @Resource
-//    private UserTransaction ut;
-//
-//    @PostConstruct
-//    public void init() throws SystemException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
-//        if (findAll().size() == 0) {
-//            try {
-//                ut.begin();
-//                insert(new Product(-1L, "Product1", "Desc1", new BigDecimal(10)));
-//                insert(new Product(-1L, "Product2", "Desc2", new BigDecimal(102)));
-//                insert(new Product(-1L, "Product3", "Desc3", new BigDecimal(1030)));
-//                insert(new Product(-1L, "Product4", "Desc4", new BigDecimal(140)));
-//            } catch (Exception e) {
-//                logger.error("Error in ProductRepository init", e);
-//                ut.rollback();
-//            }
-//            ut.commit();
-//        }
-//    }
 
     @Transactional
     public void insert(Product product) {
@@ -67,5 +48,19 @@ public class ProductRepository {
 
     public List<Product> findAll() {
         return em.createQuery("from Product", Product.class).getResultList();
+    }
+
+    public List<ProductDTO> findAllDTO() {
+        return em.createQuery("select new ru.vlsv.entity.ProductDTO(p.id, p.name, p.description, p.price, " +
+                "p.category.id, p.category.name) from Product p", ProductDTO.class)
+                .getResultList();
+
+    }
+
+    public ProductDTO findDTOById(long id) {
+        return em.createQuery("select new ru.vlsv.entity.ProductDTO(p.id, p.name, p.description, p.price, " +
+                "p.category.id, p.category.name) from Product p where p.id = :id", ProductDTO.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 }

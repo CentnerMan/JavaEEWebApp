@@ -17,11 +17,11 @@ import java.util.Objects;
 @NoArgsConstructor
 public class ProductInCart {
 
-    private Product product;
+    private ProductDTO product;
 
     private Integer count;
 
-    public ProductInCart(Product product) {
+    public ProductInCart(ProductDTO product) {
         this.product = product;
     }
 

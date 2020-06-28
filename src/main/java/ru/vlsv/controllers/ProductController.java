@@ -1,6 +1,9 @@
 package ru.vlsv.controllers;
 
+import ru.vlsv.entity.Category;
 import ru.vlsv.entity.Product;
+import ru.vlsv.entity.ProductDTO;
+import ru.vlsv.repositories.CategoryRepository;
 import ru.vlsv.repositories.ProductRepository;
 import ru.vlsv.services.ProductService;
 
@@ -18,42 +21,50 @@ public class ProductController implements Serializable {
     @Inject
     private ProductService productService;
 
-    private Product product;
+    @Inject
+    private CategoryRepository categoryRepository;
 
-    public Product getProduct() {
+    private ProductDTO product;
+
+    public ProductDTO getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ProductDTO product) {
         this.product = product;
     }
 
     public String createProduct() {
-        this.product = new Product();
+        this.product = new ProductDTO();
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public List<Product> getAllProduct() {
-        return productService.findAll();
+    public List<ProductDTO> getAllProduct() {
+        return productService.findAllDTO();
     }
 
-    public String editProduct(Product product) {
+    public String editProduct(ProductDTO product) {
         this.product = product;
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public void deleteProduct(Product product)  {
+    public void deleteProduct(ProductDTO product)  {
         productService.delete(product.getId());
         //return "/index.xhtml?faces-redirect=true";
     }
 
     public String saveProduct()  {
         if (product.getId() == null) {
-            productService.insert(product);
+            productService.insertDTO(product);
         } else {
-            productService.update(product);
+            productService.updateDTO(product);
         }
         return "/index.xhtml?faces-redirect=true";
     }
+
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
 }
 

@@ -1,6 +1,7 @@
 package ru.vlsv.services;
 
 import ru.vlsv.entity.Product;
+import ru.vlsv.entity.ProductDTO;
 import ru.vlsv.entity.ProductInCart;
 
 import javax.enterprise.context.SessionScoped;
@@ -29,12 +30,12 @@ public class CartService implements Serializable {
         products = new HashMap<>();
     }
 
-    public void addProduct(Product product, int count) {
+    public void addProduct(ProductDTO product, int count) {
         ProductInCart productIn = new ProductInCart(product);
         products.put(productIn, products.getOrDefault(productIn, 0) + count);
     }
 
-    public void delProduct(Product product, int count) {
+    public void delProduct(ProductDTO product, int count) {
         ProductInCart productIn = new ProductInCart(product);
         int currCount = products.getOrDefault(productIn, 0);
         if (currCount - count > 0) {

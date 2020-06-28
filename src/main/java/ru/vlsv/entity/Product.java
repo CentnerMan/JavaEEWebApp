@@ -40,17 +40,12 @@ public class Product {
     @ManyToOne
     private Category category;
 
-    public Product(long id, String name, String description, BigDecimal price) {
+    public Product(Long id, String name, String description, BigDecimal price, Category category) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-    }
-
-    public Product(Long id, String name, BigDecimal price) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
+        this.category = category;
     }
 
     @Override

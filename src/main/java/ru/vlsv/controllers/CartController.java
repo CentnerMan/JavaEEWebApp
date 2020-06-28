@@ -1,6 +1,7 @@
 package ru.vlsv.controllers;
 
 import ru.vlsv.entity.Product;
+import ru.vlsv.entity.ProductDTO;
 import ru.vlsv.entity.ProductInCart;
 import ru.vlsv.services.CartService;
 
@@ -29,11 +30,11 @@ public class CartController implements Serializable {
         return cartService.getAll();
     }
 
-    public void addToCart(Product product) {
+    public void addToCart(ProductDTO product) {
         cartService.addProduct(product, 1);
     }
 
-    public void delFromCart(Product product) {
+    public void delFromCart(ProductDTO product) {
         cartService.delProduct(product, 1);
     }
 }
