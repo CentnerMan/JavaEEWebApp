@@ -1,7 +1,10 @@
 package ru.vlsv.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.vlsv.entity.Category;
 import ru.vlsv.repositories.CategoryRepository;
+import ru.vlsv.repositories.ProductRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -18,7 +21,9 @@ import java.util.List;
  */
 
 @Stateless
-public class CategoryServiceImpl implements CategoryService, Serializable {
+public class CategoryServiceLocalImpl implements CategoryServiceLocal, Serializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(CategoryServiceLocalImpl.class);
 
     @EJB
     private CategoryRepository categoryRepository;

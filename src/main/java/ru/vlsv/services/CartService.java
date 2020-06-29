@@ -1,11 +1,12 @@
 package ru.vlsv.services;
 
-import ru.vlsv.entity.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.vlsv.entity.ProductDTO;
 import ru.vlsv.entity.ProductInCart;
+import ru.vlsv.repositories.CategoryRepository;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
+import javax.ejb.Stateful;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,9 +21,10 @@ import java.util.Map;
  * @link https://github.com/Centnerman
  */
 
-@Named
-@SessionScoped
+@Stateful
 public class CartService implements Serializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(CartService.class);
 
     private Map<ProductInCart, Integer> products;
 

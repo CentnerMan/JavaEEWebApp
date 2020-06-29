@@ -5,18 +5,13 @@ import org.slf4j.LoggerFactory;
 import ru.vlsv.entity.Product;
 import ru.vlsv.entity.ProductDTO;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.*;
-import java.math.BigDecimal;
 import java.util.List;
 
-@Named
-@ApplicationScoped
+@Stateless
 public class ProductRepository {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductRepository.class);
@@ -24,17 +19,17 @@ public class ProductRepository {
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
 
-    @Transactional
+    @TransactionAttribute
     public void insert(Product product) {
         em.persist(product);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void update(Product product) {
         em.merge(product);
     }
 
-    @Transactional
+    @TransactionAttribute
     public void delete(long id) {
         Product product = em.find(Product.class, id);
         if (product != null) {

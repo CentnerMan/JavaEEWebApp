@@ -1,14 +1,14 @@
 package ru.vlsv.controllers;
 
-import ru.vlsv.entity.Product;
 import ru.vlsv.entity.ProductDTO;
 import ru.vlsv.entity.ProductInCart;
 import ru.vlsv.services.CartService;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ import java.util.List;
 @SessionScoped
 public class CartController implements Serializable {
 
-    @Inject
+    @EJB
     private CartService cartService;
 
     public List<ProductInCart> getAll() {
@@ -37,4 +37,5 @@ public class CartController implements Serializable {
     public void delFromCart(ProductDTO product) {
         cartService.delProduct(product, 1);
     }
+
 }

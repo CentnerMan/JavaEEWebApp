@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 @Local
-public interface CategoryService {
+public interface CategoryServiceLocal {
 
     List<Category> findAll();
 

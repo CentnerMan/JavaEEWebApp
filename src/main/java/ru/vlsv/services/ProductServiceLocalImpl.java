@@ -1,16 +1,20 @@
 package ru.vlsv.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.vlsv.entity.Category;
 import ru.vlsv.entity.Product;
 import ru.vlsv.entity.ProductDTO;
 import ru.vlsv.repositories.CategoryRepository;
 import ru.vlsv.repositories.ProductRepository;
 
+import javax.ejb.AsyncResult;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * GeekBrains Java, JavaEEWebApp.
@@ -21,7 +25,9 @@ import java.util.List;
  */
 
 @Stateless
-public class ProductServiceImpl implements ProductService, Serializable {
+public class ProductServiceLocalImpl implements ProductServiceLocal, Serializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductServiceLocalImpl.class);
 
     @EJB
     private ProductRepository productRepository;
@@ -67,13 +73,18 @@ public class ProductServiceImpl implements ProductService, Serializable {
     }
 
     @Override
-    public ProductDTO findDTOById(long id) {
+    public ProductDTO findDTOById(Long id) {
         return productRepository.findDTOById(id);
     }
 
     @Override
     public List<ProductDTO> findAllDTO() {
         return productRepository.findAllDTO();
+    }
+
+    @Override
+    public Future<ProductDTO> findByIdAsync(Long id) {
+        return new AsyncResult<>(productRepository.findDTOById(id));
     }
 
 }

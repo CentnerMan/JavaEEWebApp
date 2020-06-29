@@ -1,12 +1,10 @@
 package ru.vlsv.controllers;
 
 import ru.vlsv.entity.Category;
-import ru.vlsv.entity.Product;
-import ru.vlsv.services.CategoryService;
-import ru.vlsv.services.ProductService;
+import ru.vlsv.services.CategoryServiceLocal;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -23,8 +21,8 @@ import java.util.List;
 @SessionScoped
 public class CategoryControler implements Serializable {
 
-    @Inject
-    private CategoryService categoryService;
+    @EJB
+    private CategoryServiceLocal categoryService;
 
     private Category category;
 
@@ -50,11 +48,11 @@ public class CategoryControler implements Serializable {
         return "/category.xhtml?faces-redirect=true";
     }
 
-    public void deleteCategory(Category category)  {
+    public void deleteCategory(Category category) {
         categoryService.delete(category.getId());
     }
 
-    public String saveCategory()  {
+    public String saveCategory() {
         if (category.getId() == null) {
             categoryService.insert(category);
         } else {

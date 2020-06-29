@@ -4,9 +4,11 @@ import ru.vlsv.entity.Category;
 import ru.vlsv.entity.Product;
 import ru.vlsv.entity.ProductDTO;
 
+import javax.ejb.Asynchronous;
 import javax.ejb.Local;
 import javax.ejb.TransactionAttribute;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * GeekBrains Java, JavaEEWebApp.
@@ -17,21 +19,25 @@ import java.util.List;
  */
 
 @Local
-public interface ProductService {
+public interface ProductServiceLocal {
 
-    public List<Product> findAll();
+    List<Product> findAll();
 
-    public void insert(Product product);
+    void insert(Product product);
 
-    public void update(Product product);
+    void update(Product product);
 
-    public void delete(Long id);
+    void delete(Long id);
 
-    public void insertDTO(ProductDTO productDTO);
+    void insertDTO(ProductDTO productDTO);
 
-    public void updateDTO(ProductDTO productDTO);
+    void updateDTO(ProductDTO productDTO);
 
-    public ProductDTO findDTOById(long id);
+    ProductDTO findDTOById(Long id);
 
-    public List<ProductDTO> findAllDTO();
+    List<ProductDTO> findAllDTO();
+
+    @Asynchronous
+    Future<ProductDTO> findByIdAsync(Long id);
+
 }

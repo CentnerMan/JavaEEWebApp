@@ -1,28 +1,26 @@
 package ru.vlsv.controllers;
 
 import ru.vlsv.entity.Category;
-import ru.vlsv.entity.Product;
 import ru.vlsv.entity.ProductDTO;
 import ru.vlsv.repositories.CategoryRepository;
-import ru.vlsv.repositories.ProductRepository;
-import ru.vlsv.services.ProductService;
+import ru.vlsv.services.CategoryServiceLocal;
+import ru.vlsv.services.ProductServiceLocal;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 @Named
 @SessionScoped
 public class ProductController implements Serializable {
 
-    @Inject
-    private ProductService productService;
+    @EJB
+    private ProductServiceLocal productService;
 
-    @Inject
-    private CategoryRepository categoryRepository;
+    @EJB
+    private CategoryServiceLocal categoryService;
 
     private ProductDTO product;
 
@@ -48,12 +46,11 @@ public class ProductController implements Serializable {
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public void deleteProduct(ProductDTO product)  {
+    public void deleteProduct(ProductDTO product) {
         productService.delete(product.getId());
-        //return "/index.xhtml?faces-redirect=true";
     }
 
-    public String saveProduct()  {
+    public String saveProduct() {
         if (product.getId() == null) {
             productService.insertDTO(product);
         } else {
@@ -63,7 +60,7 @@ public class ProductController implements Serializable {
     }
 
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+        return categoryService.findAll();
     }
 
 }
