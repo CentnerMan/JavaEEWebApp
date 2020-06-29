@@ -1,14 +1,11 @@
 package ru.vlsv.services;
 
 import ru.vlsv.entity.Category;
-import ru.vlsv.entity.Product;
 import ru.vlsv.repositories.CategoryRepository;
-import ru.vlsv.repositories.ProductRepository;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.persistence.Transient;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,29 +17,31 @@ import java.util.List;
  * @link https://github.com/Centnerman
  */
 
-@Named
-@SessionScoped
-public class CategoryService implements Serializable {
+@Stateless
+public class CategoryServiceImpl implements CategoryService, Serializable {
 
-    @Inject
+    @EJB
     private CategoryRepository categoryRepository;
 
-
+    @Override
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
 
-    @Transient
+    @Override
+    @TransactionAttribute
     public void insert(Category category) {
         categoryRepository.insert(category);
     }
 
-    @Transient
+    @Override
+    @TransactionAttribute
     public void update(Category category) {
         categoryRepository.update(category);
     }
 
-    @Transient
+    @Override
+    @TransactionAttribute
     public void delete(Long id) {
         categoryRepository.delete(id);
     }

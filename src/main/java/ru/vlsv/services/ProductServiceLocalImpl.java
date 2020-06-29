@@ -6,11 +6,9 @@ import ru.vlsv.entity.ProductDTO;
 import ru.vlsv.repositories.CategoryRepository;
 import ru.vlsv.repositories.ProductRepository;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.persistence.Transient;
-import javax.transaction.Transactional;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
 import java.io.Serializable;
 import java.util.List;
 
@@ -22,53 +20,58 @@ import java.util.List;
  * @link https://github.com/Centnerman
  */
 
-@Named
-@SessionScoped
-public class ProductService implements Serializable {
+@Stateless
+public class ProductServiceImpl implements ProductService, Serializable {
 
-    @Inject
+    @EJB
     private ProductRepository productRepository;
 
-    @Inject
+    @EJB
     private CategoryRepository categoryRepository;
 
+    @Override
     public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    @Transient
+    @Override
+    @TransactionAttribute
     public void insert(Product product) {
         productRepository.insert(product);
     }
 
-    @Transient
+    @Override
+    @TransactionAttribute
     public void update(Product product) {
         productRepository.update(product);
     }
 
-    @Transient
+    @Override
+    @TransactionAttribute
     public void delete(Long id) {
         productRepository.delete(id);
     }
 
-//    @Transactional
+    @Override
     public void insertDTO(ProductDTO productDTO) {
         Category category = categoryRepository.findById(productDTO.getCategoryId());
         productRepository.insert(new Product(null, productDTO.getName(), productDTO.getDescription(),
                 productDTO.getPrice(), category));
     }
 
-//    @Transactional
+    @Override
     public void updateDTO(ProductDTO productDTO) {
         Category category = categoryRepository.findById(productDTO.getCategoryId());
         productRepository.update(new Product(productDTO.getId(), productDTO.getName(), productDTO.getDescription(),
                 productDTO.getPrice(), category));
     }
 
+    @Override
     public ProductDTO findDTOById(long id) {
         return productRepository.findDTOById(id);
     }
 
+    @Override
     public List<ProductDTO> findAllDTO() {
         return productRepository.findAllDTO();
     }
