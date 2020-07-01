@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @Stateless
-public class CategoryServiceLocalImpl implements CategoryServiceLocal, Serializable {
+public class CategoryServiceLocalImpl implements CategoryServiceLocal {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoryServiceLocalImpl.class);
 

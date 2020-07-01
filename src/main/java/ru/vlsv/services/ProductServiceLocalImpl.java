@@ -7,11 +7,13 @@ import ru.vlsv.entity.Product;
 import ru.vlsv.entity.ProductDTO;
 import ru.vlsv.repositories.CategoryRepository;
 import ru.vlsv.repositories.ProductRepository;
+import ru.vlsv.rest.ProductServiceRest;
 
 import javax.ejb.AsyncResult;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.jws.WebService;
 import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -25,7 +27,8 @@ import java.util.concurrent.Future;
  */
 
 @Stateless
-public class ProductServiceLocalImpl implements ProductServiceLocal, Serializable {
+@WebService(endpointInterface = "ru.vlsv.services.ProductServiceWs", serviceName = "ProductService")
+public class ProductServiceLocalImpl implements ProductServiceLocal, ProductServiceWs, ProductServiceRest, Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceLocalImpl.class);
 
@@ -34,6 +37,11 @@ public class ProductServiceLocalImpl implements ProductServiceLocal, Serializabl
 
     @EJB
     private CategoryRepository categoryRepository;
+
+    @Override
+    public String hello() {
+        return "Hello!";
+    }
 
     @Override
     public List<Product> findAll() {

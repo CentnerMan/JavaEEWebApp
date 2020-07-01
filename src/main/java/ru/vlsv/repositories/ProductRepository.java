@@ -11,6 +11,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+/**
+ * GeekBrains Java, JavaEEWebApp.
+ *
+ * @author Anatoly Lebedev
+ * @version 1.0.0 17.06.2020
+ * @link https://github.com/Centnerman
+ */
+
 @Stateless
 public class ProductRepository {
 

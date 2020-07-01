@@ -1,20 +1,25 @@
-GET http://localhost:8080/JspWebApp/api/v1/product/26/id
+GET http://localhost:8080/JavaEEWebApp/api/v1/product/hello
 
 ###
 
-PUT http://localhost:8080/JspWebApp/api/v1/product/new
+GET http://localhost:8080/JavaEEWebApp/api/v1/product/all
+
+###
+
+PUT http://localhost:8080/JavaEEWebApp/api/v1/product/new
 Content-Type: application/json
 
 {
-  "description": "REST product",
-  "name": "REST product",
-  "price": 199.00
+  "description": "REST",
+  "name": "REST",
+  "category": 1,
+  "price": 111.00
 }
 
 ###
 
-GET http://localhost:8080/JspWebApp/api/v1/product/all
+GET http://localhost:8080/JavaEEWebApp/api/v1/product/1/id
 
 ###
 
-DELETE http://localhost:8080/JspWebApp/api/v1/product/26/id
+DELETE http://localhost:8080/JavaEEWebApp/api/v1/product/1/id

@@ -12,6 +12,14 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * GeekBrains Java, JavaEEWebApp.
+ *
+ * @author Anatoly Lebedev
+ * @version 1.0.0 17.06.2020
+ * @link https://github.com/Centnerman
+ */
+
 @Named
 @SessionScoped
 public class ProductController implements Serializable {

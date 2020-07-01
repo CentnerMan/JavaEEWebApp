@@ -3,6 +3,7 @@ package ru.vlsv.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -15,7 +16,7 @@ import java.util.Objects;
 
 @Data
 @NoArgsConstructor
-public class ProductInCart {
+public class ProductInCart implements Serializable {
 
     private ProductDTO product;
 

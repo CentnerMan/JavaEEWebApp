@@ -3,6 +3,7 @@ package ru.vlsv.rest;
 import ru.vlsv.entity.ProductDTO;
 
 import javax.ejb.Local;
+import javax.jws.WebMethod;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -17,7 +18,11 @@ import java.util.List;
 
 @Local
 @Path("/v1/product")
-public interface ProductServiceRs {
+public interface ProductServiceRest {
+
+    @GET
+    @Path("/hello")
+    public String hello();
 
     @PUT
     @Path("/new")
