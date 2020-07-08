@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="pageHeader" value="Cart"/>
+</ui:include>
+
+<h:body>
+
+    <ui:include src="WEB-INF/header.xhtml">
+        <ui:param name="page" value="cart"/>
+    </ui:include>
+
+    <div class="container">
+        <div class="row py-2">
+            <h:form id="cartForm">
+                <div class="col-12">
+                    <h:commandButton value="Add product" styleClass="btn btn-primary"
+                                     action="#{productController.createProduct}"/>
+                </div>
+                <div class="col-12">
+                    <h:dataTable value="#{cartController.all}" var="cart"
+                                 styleClass="table table-bordered my-2">
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{cart.product.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            #{cart.product.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Category</f:facet>
+                            #{cart.product.categoryDescription}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Price</f:facet>
+                            #{cart.product.price}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Count</f:facet>
+                            #{cart.count}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Sum</f:facet>
+                            #{cart.product.price * cart.count}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                            <h:commandButton value="Delete" action="#{cartController.delFromCart(cart.product)}"
+                                             styleClass="btn btn-danger">
+                                <f:ajax event="click" render="cartForm"/>
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+
+</html>

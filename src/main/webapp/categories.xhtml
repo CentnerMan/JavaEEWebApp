@@ -1,0 +1,54 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:include src="WEB-INF/head.xhtml">
+    <ui:param name="pageHeader" value="Category list"/>
+</ui:include>
+
+<h:body>
+
+    <ui:include src="WEB-INF/header.xhtml">
+        <ui:param name="page" value="categories"/>
+    </ui:include>
+
+    <div class="container">
+        <div class="row py-2">
+            <h:form id="categoriesForm">
+                <div class="col-12">
+                    <h:commandButton value="Add category" styleClass="btn btn-primary"
+                                     action="#{categoryControler.createCategory}"/>
+                </div>
+
+                <div class="col-12">
+                    <h:dataTable value="#{categoryControler.allCategories}" var="category"
+                                 styleClass="table table-bordered my-2">
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{category.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            #{category.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Actions</f:facet>
+                            <h:commandButton value="Edit"
+                                             action="#{categoryControler.editCategory(category)}"
+                                             styleClass="btn btn-success mr-1"/>
+                            <h:commandButton value="Delete"
+                                             action="#{categoryControler.deleteCategory(category)}"
+                                             styleClass="btn btn-danger">
+                                <f:ajax event="click" render="categoriesForm"/>
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

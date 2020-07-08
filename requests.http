@@ -1,0 +1,25 @@
+GET http://localhost:8080/JavaEEWebApp/api/v1/product/hello
+
+###
+
+GET http://localhost:8080/JavaEEWebApp/api/v1/product/all
+
+###
+
+PUT http://localhost:8080/JavaEEWebApp/api/v1/product/new
+Content-Type: application/json
+
+{
+  "description": "REST",
+  "name": "REST",
+  "category": 1,
+  "price": 111.00
+}
+
+###
+
+GET http://localhost:8080/JavaEEWebApp/api/v1/product/1/id
+
+###
+
+DELETE http://localhost:8080/JavaEEWebApp/api/v1/product/1/id
