@@ -2,7 +2,6 @@ package ru.vlsv.controllers;
 
 import ru.vlsv.entity.Category;
 import ru.vlsv.entity.ProductDTO;
-import ru.vlsv.repositories.CategoryRepository;
 import ru.vlsv.services.CategoryServiceLocal;
 import ru.vlsv.services.ProductServiceLocal;
 

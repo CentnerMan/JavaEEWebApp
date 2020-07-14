@@ -4,8 +4,6 @@ import ru.vlsv.entity.ProductDTO;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**

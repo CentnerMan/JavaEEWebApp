@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.vlsv.entity.ProductDTO;
 import ru.vlsv.entity.ProductInCart;
-import ru.vlsv.repositories.CategoryRepository;
 
 import javax.ejb.Stateful;
 import java.io.Serializable;

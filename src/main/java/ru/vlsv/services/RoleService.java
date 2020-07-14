@@ -1,5 +1,15 @@
 package ru.vlsv.services;
 
+import ru.vlsv.entity.RoleDTO;
+import ru.vlsv.repositories.RoleRepository;
+
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.inject.Inject;
+import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * GeekBrains Java, JavaEEWebApp.
  *
@@ -8,5 +18,16 @@ package ru.vlsv.services;
  * @link https://github.com/Centnerman
  */
 
-public class RoleService {
+@Stateless
+public class RoleService implements Serializable {
+
+    @Inject
+    private RoleRepository roleRepository;
+
+    @TransactionAttribute
+    public List<RoleDTO> getAllRoles() {
+        return roleRepository.getAllRoles().stream()
+                .map(RoleDTO::new)
+                .collect(Collectors.toList());
+    }
 }

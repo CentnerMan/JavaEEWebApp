@@ -1,8 +1,7 @@
-package ru.vlsv.dto;
+package ru.vlsv.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.vlsv.entity.User;
 
 import java.io.Serializable;
 import java.util.HashSet;
