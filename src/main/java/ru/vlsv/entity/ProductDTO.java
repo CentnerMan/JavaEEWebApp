@@ -1,4 +1,4 @@
-package ru.vlsv.entity;
+package ru.vlsv.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
