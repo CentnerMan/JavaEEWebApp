@@ -6,11 +6,8 @@
 
     <groupId>ru.vlsv</groupId>
     <artifactId>JavaEEWebApp</artifactId>
-    <version>1.0.6</version>
-    <modules>
-        <module>soap-client</module>
-    </modules>
-    <packaging>pom</packaging>
+    <version>1.0.8</version>
+    <packaging>war</packaging>
 
     <name>JavaEEWebApp Maven Webapp</name>
     <url>http://www.vlsv.ru</url>

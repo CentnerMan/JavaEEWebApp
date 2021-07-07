@@ -1,12 +1,10 @@
 package ru.vlsv.services;
 
-import ru.vlsv.entity.Category;
 import ru.vlsv.entity.Product;
 import ru.vlsv.entity.ProductDTO;
 
 import javax.ejb.Asynchronous;
 import javax.ejb.Local;
-import javax.ejb.TransactionAttribute;
 import java.util.List;
 import java.util.concurrent.Future;
 
